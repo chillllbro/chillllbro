@@ -248,43 +248,258 @@ function addHoverEffects() {
 
 // Optional: Add background music toggle
 function addMusicToggle() {
+    // Create audio element for background music
+    const audio = document.createElement('audio');
+    audio.id = 'background-music';
+    audio.loop = true;
+    audio.preload = 'auto';
+    audio.volume = 0.5; // Set default volume to 50%
+    
+    // Create music toggle button
     const musicToggle = document.createElement('button');
     musicToggle.innerHTML = '🎵';
     musicToggle.className = 'music-toggle';
-    musicToggle.style.cssText = `
+    musicToggle.id = 'music-toggle';
+    musicToggle.title = 'Click to play/pause music';
+    
+    // Create volume control
+    const volumeControl = document.createElement('div');
+    volumeControl.className = 'volume-control';
+    volumeControl.style.cssText = `
         position: fixed;
-        top: 20px;
+        top: 80px;
         right: 20px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: none;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px;
+        display: none;
         z-index: 1000;
         transition: all 0.3s ease;
     `;
     
-    musicToggle.addEventListener('click', () => {
-        musicToggle.style.transform = 'rotate(360deg)';
-        setTimeout(() => {
-            musicToggle.style.transform = 'rotate(0deg)';
-        }, 300);
+    volumeControl.innerHTML = `
+        <div style="margin-bottom: 10px; color: white; font-size: 0.9rem;">Volume</div>
+        <input type="range" id="volume-slider" min="0" max="100" value="50" style="width: 100px;">
+        <div style="margin-top: 10px; color: white; font-size: 0.9rem;">🎵</div>
+    `;
+    
+    // Add styles for music toggle button
+    const musicToggleStyles = `
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
         
-        // Show message about music
-        const modalManager = new ModalManager();
-        modalManager.showModal(`
-            <h2>🎵 Music Feature</h2>
-            <p>This is where you could add background music!</p>
-            <p>Just add an audio element and control it here.</p>
-            <div style="font-size: 3rem; margin: 20px 0;">🎶✨</div>
-        `);
+        .music-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .music-toggle.playing {
+            background: rgba(76, 175, 80, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+        
+        .volume-control input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+        
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .volume-control input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+    `;
+    
+    // Inject styles
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = musicToggleStyles;
+    document.head.appendChild(styleSheet);
+    
+    // Music toggle functionality
+    let isPlaying = false;
+    let volumeControlVisible = false;
+    
+    // Function to start music
+    function startMusic() {
+        audio.play().then(() => {
+            isPlaying = true;
+            musicToggle.innerHTML = '⏸️';
+            musicToggle.classList.add('playing');
+            musicToggle.title = 'Click to pause music';
+        }).catch(error => {
+            console.log('Auto-play failed:', error);
+            // Auto-play failed, but that's normal
+            isPlaying = false;
+        });
+    }
+    
+    // Function to stop music
+    function stopMusic() {
+        audio.pause();
+        isPlaying = false;
+        musicToggle.innerHTML = '🎵';
+        musicToggle.classList.remove('playing');
+        musicToggle.title = 'Click to play music';
+        
+        // Hide volume control when stopping
+        volumeControl.style.display = 'none';
+        volumeControlVisible = false;
+    }
+    
+    // Function to toggle volume control
+    function toggleVolumeControl() {
+        if (volumeControlVisible) {
+            volumeControl.style.display = 'none';
+            volumeControlVisible = false;
+        } else {
+            volumeControl.style.display = 'block';
+            volumeControlVisible = true;
+        }
+    }
+    
+               // Music toggle click handler
+           musicToggle.addEventListener('click', () => {
+               if (!isPlaying) {
+                   startMusic();
+               } else {
+                   // If music is playing, pause it
+                   stopMusic();
+               }
+           });
+    
+               // Right-click to show/hide volume control
+           musicToggle.addEventListener('contextmenu', (e) => {
+               e.preventDefault();
+               toggleVolumeControl();
+           });
+           
+           // Long press (touch) to show/hide volume control
+           let longPressTimer;
+           musicToggle.addEventListener('touchstart', () => {
+               longPressTimer = setTimeout(() => {
+                   toggleVolumeControl();
+               }, 500); // 500ms long press
+           });
+           
+           musicToggle.addEventListener('touchend', () => {
+               clearTimeout(longPressTimer);
+           });
+    
+    // Volume control functionality
+    const volumeSlider = volumeControl.querySelector('#volume-slider');
+    volumeSlider.addEventListener('input', (e) => {
+        const volume = e.target.value / 100;
+        audio.volume = volume;
     });
     
+    // Volume control click handler (for mobile)
+    volumeControl.addEventListener('click', (e) => {
+        // Prevent clicks inside volume control from closing it
+        e.stopPropagation();
+    });
+    
+    // Close volume control when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!volumeControl.contains(e.target) && !musicToggle.contains(e.target)) {
+            volumeControl.style.display = 'none';
+            volumeControlVisible = false;
+        }
+    });
+    
+    // Add elements to page
+    document.body.appendChild(audio);
     document.body.appendChild(musicToggle);
+    document.body.appendChild(volumeControl);
+    
+    // Add music source (you can change this to your preferred song)
+    audio.src = 'birthday-music.mp3'; // 🔧 CHANGE THIS TO YOUR MUSIC FILE!
+    
+    // Attempt to auto-start music when page loads
+    // Note: Modern browsers block auto-play until user interaction
+    // This will attempt to play but may fail silently
+    setTimeout(() => {
+        startMusic();
+    }, 1000); // Wait 1 second after page load
+    
+    // Also try to start music on first user interaction with the page
+    let firstInteraction = true;
+    const interactionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
+    
+    interactionEvents.forEach(event => {
+        document.addEventListener(event, () => {
+            if (firstInteraction && !isPlaying) {
+                startMusic();
+                firstInteraction = false;
+            }
+        }, { once: true });
+    });
+    
+    // Show instructions on first visit
+    if (!localStorage.getItem('music-instructions-shown')) {
+        setTimeout(() => {
+            const modalManager = new ModalManager();
+            modalManager.showModal(`
+                <h2>🎵 Welcome to Your Birthday Page!</h2>
+                <p>Music will start automatically when you interact with the page!</p>
+                <p><strong>To add your own music:</strong></p>
+                <ol style="text-align: left; margin: 20px 0;">
+                    <li>Save your music file in this folder (e.g., birthday-song.mp3)</li>
+                    <li>Open index.js and find line 435</li>
+                    <li>Change 'birthday-music.mp3' to your filename</li>
+                </ol>
+                <p><strong>Music Controls:</strong></p>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li>🎵 Click to play/pause</li>
+                    <li>🔊 Click again to see volume control</li>
+                    <li>🔄 Music loops automatically</li>
+                </ul>
+                <div style="font-size: 3rem; margin: 20px 0;">🎂🎶</div>
+            `);
+            localStorage.setItem('music-instructions-shown', 'true');
+        }, 3000);
+    }
 }
 
 // Add some fun Easter eggs
