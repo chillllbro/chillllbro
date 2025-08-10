@@ -1,47 +1,124 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>OTP</title>
-        <link rel="icon" href="SNAP_20221208-220033.jpg" type="image/jpg">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="index.css">
-        <script src="https://use.fontawesome.com/7ee8ad7d75.js"></script>
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="glass-morphed-1" >
-            <h1 id="name">Su bhai date par aais ?</h1>
-            <h6>Natak na kar and chup chaap haa paadje</h6>
-        </div>
-        <div class="glass-morphed-2">
-            <p id="big-text">LE SARKHI RITE PUCHU CHU</p>
-            <div class="about-me">
-                <br>
-                hu su kau chu, chalne ne Canada, visa lai lidho che ave to vapru ne. Canada nai toh bije kyay bi chalse hon ;) <br>
-                jo tane khabar toh che ke tu ave aam thodik integral part thai gai chu jeevan ni, thodik aj, bau nai. <br>
-                Vaat karya vagar divas nai nikadto tbh, toh vicharyu date par aj lai jau , kyay bi, aa gaamda thi durr, <br>
-                HAA paadje ne baku *wink**wink*. Na padis toh dil tooti jase &lt;/3 <br>
-            </div>        
-            <br>
-            <a href="answer.html">YES OR NO ?</a> 
-            <br>
-            <br>
-            <div>here, i've complied a video for you, all my favs of us, vadhare cute nathi thai gayu ne ?</div>
-                <video width="320" height="240" controls>
-                    <source src="RPReplay_Final1709916139.mp4" type="video/mp4">        
-            </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Happy Birthday! 🎂</title>
+    <meta name="description" content="A special birthday celebration just for you!">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Custom Background Image -->
+    <div class="background-image"></div>
+    
+    <!-- Animated Background Overlay -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
 
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="birthday-icon">🎂</div>
+            <h1 class="main-title">
+                <span class="title-line">Happy</span>
+                <span class="title-line">Birthday!</span>
+            </h1>
+            <p class="subtitle">Wishing you a day filled with joy, laughter, and endless happiness!</p>
+        </header>
+
+        <!-- Birthday Wishes Card -->
+        <section class="wishes-card">
+            <div class="card-content">
+                <h2 class="card-title">💝 Birthday Wishes 💝</h2>
+                <div class="birthday-message">
+                    <p>On this special day, I want to take a moment to celebrate you and all the wonderful things that make you unique.</p>
+                    <p>Your smile brightens up every room you enter, and your kindness touches the hearts of everyone around you.</p>
+                    <p>May this year bring you countless moments of joy, success in all your endeavors, and the fulfillment of your wildest dreams.</p>
+                    <p>You deserve all the happiness in the world! 🎊✨</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Message Section -->
+        <section class="personal-message">
+            <div class="message-content">
+                <h3>💌 A Personal Note 💌</h3>
+                <div class="message-text">
+                    <p>You've become such an important part of my life, and I'm grateful for every moment we've shared together.</p>
+                    <p>Whether it's our daily conversations, the laughs we've had, or the memories we've created, you've made my life so much richer.</p>
+                    <p>Thank you for being you - authentic, caring, and absolutely amazing! 🌟</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <h3>🎬 A Special Video For You</h3>
+            <p>I've compiled some of our favorite moments together - hope it brings a smile to your face!</p>
+            <div class="video-container">
+                <video controls class="celebration-video">
+                    <source src="RPReplay_Final1709916139.mp4" type="video/mp4">
+                    Your browser doesn't support video playback.
+                </video>
+            </div>
+        </section>
+
+        <!-- Password Protected Secret Message -->
+        <section class="secret-message-section">
+            <h3>A Secret Message Just For You</h3>
+            <p>There's something special hidden here... but you'll need the right password to see it!</p>
+            
+            <div class="password-form">
+                <input type="password" id="password-input" placeholder="Enter the secret password..." class="password-input">
+                <button onclick="checkPassword()" class="btn btn-secret">🔓 Unlock Message</button>
+            </div>
+            
+            <div id="secret-content" class="secret-content" style="display: none;">
+                <h4>My Secret Birthday Wish For You</h4>
+                <div class="secret-text">
+                    <p>This is where you can write your most personal, heartfelt message...</p>
+                    <p>Maybe something like: "You mean the world to me, and I'm so lucky to have you in my life."</p>
+                    <p>Or: "I hope this year brings you everything you've ever wished for and more."</p>
+                    <p>Make it special and personal! 💝</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ for someone incredibly special</p>
+            <div class="footer-icons">
+                <span>🎂</span>
+                <span>🎉</span>
+                <span>✨</span>
+                <span>🎊</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-message"></div>
         </div>
-        <br>
-        <br>
-        <br>
-        
-    </body>
+    </div>
+
+    <script src="index.js"></script>
+</body>
 </html>
