@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Question</title>
+    <style>
+        p {
+        text-align: center;
+        font-size: 32px;
+        font-family: Arial, sans-serif;
+        }
+        img {
+        display: block;
+        margin: 0 auto;
+        width: 40%;
+        }
+    </style>
+    </head>
+    <body>
+        <p>So YES </p>
+        <img id="pic" src="https://1.bp.blogspot.com/-CwIjwA56di8/WAT57UzNF8I/AAAAAAAAT_4/hihRJMxwtTAUsT5S3AfeeA1iZF9JWvd7wCLcB/s1600/Una%2Brosa%2Bpara%2Bti%2Bcon%2Btierno%2Bperrito.gif" alt="GIF animado">
+    </body>
+    <title>Rutu</title>
+    <style>
+    img{
+        max-width: 501;
+        max-height: 1000;
+    }
+    #botao1 {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    #botao2 {
+        position: absolute;
+    }
+    </style>
+    </head>
+    <body>
+        <button id="botao1">Yes I'll</button>
+        <button id="botao2">No, Leave me alone</button>
+    <script>
+        document.addEventListener("mouseover", function (event) {
+        var botao2 = document.getElementById('botao2');
+        var x = Math.random() * window.innerWidth;
+        var y = Math.random() * window.innerHeight;
+        botao2.style.left = x + 35 + "px";
+        botao2.style.top = y + 35 + "px";
+    });
+    </script>
+    <script>document.getElementById('botao1').addEventListener('click', function() {
+            alert('Khabar aj hati mane, love you too');
+        });
+    </script>
+    </body>
+</html>
