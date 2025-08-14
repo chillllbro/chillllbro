@@ -1426,6 +1426,7 @@ function addHoverEffects() {
 
 // Optional: Add background music toggle
 function addMusicToggle() {
+    if (!SHOW_REAL_CONTENT) return; // Only allow music if real content is shown
     // Create audio element for background music
     const audio = document.createElement('audio');
     audio.id = 'background-music';
