@@ -1336,10 +1336,9 @@ function checkPassword() {
         
         // Show error message
         modalManager.showModal(`
-            <h2>🔒 Access Denied</h2>
+            <h2><strong>Access Denied</strong></h2>
             <p>That's not the right password!</p>
-            <p>Try again... maybe it's something special to you? 🤔</p>
-            <div style="font-size: 3rem; margin: 20px 0;">🔐😅</div>
+            <p>Try again... maybe it's something special to you? </p>
         `);
     }
 }
