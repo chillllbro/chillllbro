@@ -100,7 +100,9 @@ class CountdownTimer {
                 left: 0;
                 width: 100%;
                 height: 100vh;
+                height: -webkit-fill-available;
                 min-height: 100vh;
+                min-height: -webkit-fill-available;
                 background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
                 z-index: 10000;
                 display: flex;
@@ -110,8 +112,14 @@ class CountdownTimer {
                 color: white;
                 overflow-y: auto;
                 overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
                 padding: 20px;
                 box-sizing: border-box;
+                /* Safari-specific fixes */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
             }
             
             .countdown-container {
@@ -120,6 +128,7 @@ class CountdownTimer {
                 width: 100%;
                 padding: 30px 20px;
                 background: rgba(0, 0, 0, 0.3);
+                -webkit-backdrop-filter: blur(25px);
                 backdrop-filter: blur(25px);
                 border-radius: 20px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
@@ -130,6 +139,11 @@ class CountdownTimer {
                 position: relative;
                 margin: auto;
                 min-height: fit-content;
+                /* Safari-specific fixes */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
             }
             
             .countdown-container::before {
@@ -149,6 +163,11 @@ class CountdownTimer {
                 to { opacity: 1; transform: scale(1) translateY(0); }
             }
             
+            @-webkit-keyframes countdownFadeIn {
+                from { opacity: 0; -webkit-transform: scale(0.9) translateY(20px); }
+                to { opacity: 1; -webkit-transform: scale(1) translateY(0); }
+            }
+            
             .countdown-header h1 {
                 font-size: 2.5rem;
                 margin-bottom: 15px;
@@ -156,10 +175,14 @@ class CountdownTimer {
                 animation: titleGlow 2s ease-in-out infinite alternate;
                 background: linear-gradient(45deg, #00d4ff, #ffffff);
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
                 background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
                 line-height: 1.2;
                 word-wrap: break-word;
+                /* Safari text rendering fix */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
             
             @keyframes titleGlow {
@@ -168,6 +191,15 @@ class CountdownTimer {
                 }
                 to { 
                     filter: drop-shadow(0 4px 25px rgba(0, 212, 255, 0.6));
+                }
+            }
+            
+            @-webkit-keyframes titleGlow {
+                from { 
+                    -webkit-filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5));
+                }
+                to { 
+                    -webkit-filter: drop-shadow(0 4px 25px rgba(0, 212, 255, 0.6));
                 }
             }
             
@@ -196,14 +228,17 @@ class CountdownTimer {
                 background: rgba(255, 255, 255, 0.05);
                 border-radius: 15px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
+                -webkit-backdrop-filter: blur(10px);
                 backdrop-filter: blur(10px);
                 transition: all 0.3s ease;
+                -webkit-transition: all 0.3s ease;
             }
             
             .time-unit:hover {
                 background: rgba(255, 255, 255, 0.1);
                 border-color: rgba(0, 212, 255, 0.3);
                 transform: translateY(-5px);
+                -webkit-transform: translateY(-5px);
                 box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
             }
             
@@ -212,16 +247,27 @@ class CountdownTimer {
                 font-weight: 700;
                 background: linear-gradient(45deg, #00d4ff, #0099cc);
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
                 background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-fill-color: transparent;
                 text-shadow: none;
                 animation: numberPulse 1s ease-in-out infinite;
+                -webkit-animation: numberPulse 1s ease-in-out infinite;
                 filter: drop-shadow(0 2px 10px rgba(0, 212, 255, 0.3));
+                -webkit-filter: drop-shadow(0 2px 10px rgba(0, 212, 255, 0.3));
+                /* Safari text rendering fix */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
             
             @keyframes numberPulse {
                 0%, 100% { transform: scale(1); }
                 50% { transform: scale(1.05); }
+            }
+            
+            @-webkit-keyframes numberPulse {
+                0%, 100% { -webkit-transform: scale(1); }
+                50% { -webkit-transform: scale(1.05); }
             }
             
             .time-label {
@@ -240,6 +286,7 @@ class CountdownTimer {
                 border-radius: 15px;
                 margin-bottom: 25px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
+                -webkit-backdrop-filter: blur(15px);
                 backdrop-filter: blur(15px);
                 position: relative;
             }
@@ -295,6 +342,7 @@ class CountdownTimer {
                     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
                     radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
                 animation: backgroundFloat 20s ease-in-out infinite;
+                -webkit-animation: backgroundFloat 20s ease-in-out infinite;
                 pointer-events: none;
             }
             
@@ -303,12 +351,36 @@ class CountdownTimer {
                 50% { transform: translateY(-20px) rotate(180deg); }
             }
             
+            @-webkit-keyframes backgroundFloat {
+                0%, 100% { -webkit-transform: translateY(0px) rotate(0deg); }
+                50% { -webkit-transform: translateY(-20px) rotate(180deg); }
+            }
+            
+            /* Safari-specific viewport fixes */
+            @supports (-webkit-touch-callout: none) {
+                #countdown-overlay {
+                    height: -webkit-fill-available;
+                    min-height: -webkit-fill-available;
+                }
+            }
+            
+            /* iOS Safari specific fixes */
+            @media screen and (-webkit-min-device-pixel-ratio: 0) {
+                #countdown-overlay {
+                    height: 100vh;
+                    height: -webkit-fill-available;
+                }
+            }
+            
             /* Responsive design */
             @media (max-width: 768px) {
                 #countdown-overlay {
                     padding: 15px;
                     align-items: flex-start;
                     padding-top: 20px;
+                    /* Safari mobile specific */
+                    height: 100vh;
+                    height: -webkit-fill-available;
                 }
                 
                 .countdown-container {
@@ -369,6 +441,9 @@ class CountdownTimer {
                 #countdown-overlay {
                     padding: 10px;
                     padding-top: 15px;
+                    /* Safari mobile specific */
+                    height: 100vh;
+                    height: -webkit-fill-available;
                 }
                 
                 .countdown-container {
@@ -428,6 +503,9 @@ class CountdownTimer {
                 #countdown-overlay {
                     align-items: flex-start;
                     padding-top: 10px;
+                    /* Safari mobile specific */
+                    height: 100vh;
+                    height: -webkit-fill-available;
                 }
                 
                 .countdown-container {
