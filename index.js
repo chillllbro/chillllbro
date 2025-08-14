@@ -99,7 +99,8 @@ class CountdownTimer {
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 100%;
+                height: 100vh;
+                min-height: 100vh;
                 background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
                 z-index: 10000;
                 display: flex;
@@ -107,22 +108,28 @@ class CountdownTimer {
                 justify-content: center;
                 font-family: 'Poppins', sans-serif;
                 color: white;
-                overflow: hidden;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 20px;
+                box-sizing: border-box;
             }
             
             .countdown-container {
                 text-align: center;
                 max-width: 800px;
-                padding: 40px;
+                width: 100%;
+                padding: 30px 20px;
                 background: rgba(0, 0, 0, 0.3);
                 backdrop-filter: blur(25px);
-                border-radius: 30px;
+                border-radius: 20px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 box-shadow: 
                     0 25px 80px rgba(0, 0, 0, 0.5),
                     inset 0 1px 0 rgba(255, 255, 255, 0.1);
                 animation: countdownFadeIn 1s ease-out;
                 position: relative;
+                margin: auto;
+                min-height: fit-content;
             }
             
             .countdown-container::before {
@@ -133,7 +140,7 @@ class CountdownTimer {
                 right: 0;
                 bottom: 0;
                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-                border-radius: 30px;
+                border-radius: 20px;
                 pointer-events: none;
             }
             
@@ -143,7 +150,7 @@ class CountdownTimer {
             }
             
             .countdown-header h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
                 margin-bottom: 15px;
                 text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
                 animation: titleGlow 2s ease-in-out infinite alternate;
@@ -151,6 +158,8 @@ class CountdownTimer {
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
+                line-height: 1.2;
+                word-wrap: break-word;
             }
             
             @keyframes titleGlow {
@@ -163,17 +172,18 @@ class CountdownTimer {
             }
             
             .countdown-header p {
-                font-size: 1.3rem;
-                margin-bottom: 40px;
+                font-size: 1.2rem;
+                margin-bottom: 30px;
                 opacity: 0.9;
                 color: #b8b8b8;
+                line-height: 1.3;
             }
             
             .countdown-timer {
                 display: flex;
                 justify-content: center;
-                gap: 30px;
-                margin-bottom: 40px;
+                gap: 25px;
+                margin-bottom: 30px;
                 flex-wrap: wrap;
             }
             
@@ -181,10 +191,10 @@ class CountdownTimer {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                min-width: 120px;
-                padding: 20px;
+                min-width: 100px;
+                padding: 15px;
                 background: rgba(255, 255, 255, 0.05);
-                border-radius: 20px;
+                border-radius: 15px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 backdrop-filter: blur(10px);
                 transition: all 0.3s ease;
@@ -198,7 +208,7 @@ class CountdownTimer {
             }
             
             .time-number {
-                font-size: 4rem;
+                font-size: 3.5rem;
                 font-weight: 700;
                 background: linear-gradient(45deg, #00d4ff, #0099cc);
                 -webkit-background-clip: text;
@@ -215,8 +225,8 @@ class CountdownTimer {
             }
             
             .time-label {
-                font-size: 1rem;
-                margin-top: 10px;
+                font-size: 0.9rem;
+                margin-top: 8px;
                 opacity: 0.8;
                 text-transform: uppercase;
                 letter-spacing: 1px;
@@ -226,9 +236,9 @@ class CountdownTimer {
             
             .countdown-info {
                 background: rgba(0, 0, 0, 0.4);
-                padding: 25px;
-                border-radius: 20px;
-                margin-bottom: 30px;
+                padding: 20px 15px;
+                border-radius: 15px;
+                margin-bottom: 25px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 backdrop-filter: blur(15px);
                 position: relative;
@@ -242,16 +252,17 @@ class CountdownTimer {
                 right: 0;
                 bottom: 0;
                 background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
-                border-radius: 20px;
+                border-radius: 15px;
                 pointer-events: none;
             }
             
             .countdown-info p {
-                margin: 10px 0;
-                font-size: 1.1rem;
+                margin: 8px 0;
+                font-size: 1rem;
                 color: #e0e0e0;
                 position: relative;
                 z-index: 1;
+                line-height: 1.4;
             }
             
             .countdown-info strong {
@@ -260,20 +271,21 @@ class CountdownTimer {
             }
             
             .countdown-message {
-                font-size: 1.2rem;
-                line-height: 1.6;
+                font-size: 1.1rem;
+                line-height: 1.5;
                 color: #b8b8b8;
             }
             
             .countdown-message p {
-                margin: 10px 0;
+                margin: 8px 0;
                 opacity: 0.9;
+                line-height: 1.4;
             }
             
             /* Floating particles for visual appeal */
             #countdown-overlay::before {
                 content: '';
-                position: absolute;
+                position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
@@ -283,6 +295,7 @@ class CountdownTimer {
                     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
                     radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
                 animation: backgroundFloat 20s ease-in-out infinite;
+                pointer-events: none;
             }
             
             @keyframes backgroundFloat {
@@ -292,36 +305,31 @@ class CountdownTimer {
             
             /* Responsive design */
             @media (max-width: 768px) {
+                #countdown-overlay {
+                    padding: 15px;
+                    align-items: flex-start;
+                    padding-top: 20px;
+                }
+                
                 .countdown-container {
-                    padding: 30px 20px;
-                    margin: 20px;
+                    padding: 25px 15px;
+                    margin: 0;
+                    border-radius: 15px;
                 }
                 
                 .countdown-header h1 {
-                    font-size: 2.5rem;
+                    font-size: 2rem;
+                    margin-bottom: 12px;
+                }
+                
+                .countdown-header p {
+                    font-size: 1.1rem;
+                    margin-bottom: 20px;
                 }
                 
                 .countdown-timer {
                     gap: 20px;
-                }
-                
-                .time-unit {
-                    min-width: 100px;
-                    padding: 15px;
-                }
-                
-                .time-number {
-                    font-size: 3rem;
-                }
-            }
-            
-            @media (max-width: 480px) {
-                .countdown-header h1 {
-                    font-size: 2rem;
-                }
-                
-                .countdown-timer {
-                    gap: 15px;
+                    margin-bottom: 25px;
                 }
                 
                 .time-unit {
@@ -330,11 +338,146 @@ class CountdownTimer {
                 }
                 
                 .time-number {
+                    font-size: 3rem;
+                }
+                
+                .time-label {
+                    font-size: 0.8rem;
+                    margin-top: 6px;
+                }
+                
+                .countdown-info {
+                    padding: 18px 12px;
+                    margin-bottom: 20px;
+                }
+                
+                .countdown-info p {
+                    font-size: 0.95rem;
+                    margin: 6px 0;
+                }
+                
+                .countdown-message {
+                    font-size: 1rem;
+                }
+                
+                .countdown-message p {
+                    margin: 6px 0;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                #countdown-overlay {
+                    padding: 10px;
+                    padding-top: 15px;
+                }
+                
+                .countdown-container {
+                    padding: 20px 12px;
+                    border-radius: 12px;
+                }
+                
+                .countdown-header h1 {
+                    font-size: 1.8rem;
+                    margin-bottom: 10px;
+                }
+                
+                .countdown-header p {
+                    font-size: 1rem;
+                    margin-bottom: 15px;
+                }
+                
+                .countdown-timer {
+                    gap: 15px;
+                    margin-bottom: 20px;
+                }
+                
+                .time-unit {
+                    min-width: 70px;
+                    padding: 10px;
+                }
+                
+                .time-number {
                     font-size: 2.5rem;
                 }
                 
                 .time-label {
+                    font-size: 0.75rem;
+                    margin-top: 5px;
+                }
+                
+                .countdown-info {
+                    padding: 15px 10px;
+                    margin-bottom: 15px;
+                }
+                
+                .countdown-info p {
                     font-size: 0.9rem;
+                    margin: 5px 0;
+                }
+                
+                .countdown-message {
+                    font-size: 0.95rem;
+                }
+                
+                .countdown-message p {
+                    margin: 5px 0;
+                }
+            }
+            
+            @media (max-height: 600px) {
+                #countdown-overlay {
+                    align-items: flex-start;
+                    padding-top: 10px;
+                }
+                
+                .countdown-container {
+                    padding: 20px 15px;
+                }
+                
+                .countdown-header h1 {
+                    font-size: 1.8rem;
+                    margin-bottom: 8px;
+                }
+                
+                .countdown-header p {
+                    font-size: 0.9rem;
+                    margin-bottom: 12px;
+                }
+                
+                .countdown-timer {
+                    gap: 15px;
+                    margin-bottom: 15px;
+                }
+                
+                .time-unit {
+                    padding: 10px;
+                }
+                
+                .time-number {
+                    font-size: 2.5rem;
+                }
+                
+                .time-label {
+                    font-size: 0.7rem;
+                    margin-top: 4px;
+                }
+                
+                .countdown-info {
+                    padding: 12px 10px;
+                    margin-bottom: 12px;
+                }
+                
+                .countdown-info p {
+                    font-size: 0.85rem;
+                    margin: 4px 0;
+                }
+                
+                .countdown-message {
+                    font-size: 0.9rem;
+                }
+                
+                .countdown-message p {
+                    margin: 4px 0;
                 }
             }
         `;
@@ -508,7 +651,7 @@ class CountdownTimer {
             <div class="gotcha-container">
                 <div class="gotcha-icon">🤡</div>
                 <h1 class="gotcha-title">You think I'll do this much mehnat?</h1>
-                <p class="gotcha-subtitle">Nice try, but I'm not that attached!</p>
+                <p class="gotcha-subtitle">Nice try, but I'm not that big of a giver!</p>
                 
                 <div class="gotcha-message">
                     <p> You've been tricked! 🎭</p>
