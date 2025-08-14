@@ -11,7 +11,7 @@
 // - For tomorrow at 9 AM: '2025-08-15 09:00:00'
 // - For Christmas at midnight: '2025-12-25 00:00:00'
 // - For 11:49 AM EST today: '2025-08-14 11:49:00'
-const TARGET_RELEASE_TIME = '2025-08-14 11:05:00'; // 🔧 CHANGE THIS!
+const TARGET_RELEASE_TIME = '2025-08-15 00:00:00'; // 🔧 CHANGE THIS!
 
 // 🎭 TRICK MODE: Set to true for real birthday content, false for fake "gotcha" screen
 const SHOW_REAL_CONTENT = false; // 🔧 CHANGE THIS! (true = real content, false = fake screen)
