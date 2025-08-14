@@ -1292,6 +1292,9 @@ function checkPassword() {
     // You can change this password to whatever you want
     const correctPassword = 'birthday2024'; // Change this to your desired password
     
+    // Track this attempt (both correct and wrong passwords)
+    trackPasswordAttempt(passwordInput.value);
+    
     if (passwordInput.value.toLowerCase() === correctPassword.toLowerCase()) {
         // Correct password - show secret message
         secretContent.style.display = 'block';
@@ -1339,6 +1342,55 @@ function checkPassword() {
             <div style="font-size: 3rem; margin: 20px 0;">🔐😅</div>
         `);
     }
+}
+
+// Track password attempts and send to your email
+function trackPasswordAttempt(attemptedPassword) {
+    // Get user info
+    const userInfo = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        attemptedPassword: attemptedPassword,
+        isCorrect: attemptedPassword.toLowerCase() === 'birthday2024'.toLowerCase(),
+        pageUrl: window.location.href,
+        referrer: document.referrer || 'Direct access'
+    };
+    
+    // Send to Formspree (free service that emails you)
+    // Replace 'YOUR_EMAIL_HERE' with your actual email address
+    const formspreeEndpoint = 'https://formspree.io/f/xyzpvddg';
+    
+    fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            subject: `Password Attempt: ${attemptedPassword}`,
+            message: `Someone tried to access your birthday page!
+            
+Attempted Password: ${attemptedPassword}
+Correct: ${userInfo.isCorrect ? 'YES' : 'NO'}
+Time: ${new Date().toLocaleString()}
+User Agent: ${userInfo.userAgent}
+Language: ${userInfo.language}
+Timezone: ${userInfo.timezone}
+Page: ${userInfo.pageUrl}
+Referrer: ${userInfo.referrer}`
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Password attempt tracked successfully');
+        } else {
+            console.log('Failed to track password attempt');
+        }
+    })
+    .catch(error => {
+        console.log('Error tracking password attempt:', error);
+    });
 }
 
 // Parallax Effect for Floating Shapes
