@@ -152,6 +152,10 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 /* Header Section */
@@ -318,6 +322,23 @@ body {
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Mobile video optimization */
+@media screen and (max-width: 768px) {
+    .celebration-video {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+    
+    .video-container {
+        padding: 15px;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 /* Secret Message Section */
@@ -425,6 +446,22 @@ body {
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.secret-text .secret-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 15px;
+    margin: 15px auto;
+    display: block;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.secret-text .secret-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
 }
 
 /* Footer */
@@ -686,6 +723,8 @@ body {
         min-height: 100vh;
         height: -webkit-fill-available;
         min-height: -webkit-fill-available;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
     }
     #countdown-overlay,
     .modal,
@@ -698,14 +737,412 @@ body {
     }
 }
 
+/* Enhanced iOS Safari compatibility */
+@supports (-webkit-touch-callout: none) {
+    .container {
+        -webkit-overflow-scrolling: touch;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .floating-shapes {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+    }
+    
+    .secret-text .secret-image {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+    }
+}
+
 /* Make buttons and inputs easier to tap on iOS */
 input, button {
     font-size: 1rem;
     -webkit-tap-highlight-color: rgba(233,30,99,0.2);
     touch-action: manipulation;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
 }
 
 /* Prevent double-tap zoom on buttons/inputs */
 input, button, .btn-secret {
     touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Mobile landscape optimization */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .header {
+        padding: 20px 20px;
+        margin-bottom: 20px;
+    }
+    
+    .birthday-icon {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    .wishes-card,
+    .personal-message,
+    .secret-message-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .birthday-message p,
+    .message-text p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+}
+
+/* Notch and safe area handling for modern iPhones */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .header {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .footer {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(40px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Enhanced touch targets for mobile */
+.btn-secret {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 30px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(233, 30, 99, 0.3);
+    tap-highlight-color: rgba(233, 30, 99, 0.3);
+}
+
+.password-input {
+    min-height: 44px;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: text;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+    tap-highlight-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Better button states for mobile */
+.btn-secret:active {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-transition: -webkit-transform 0.1s ease;
+    transition: transform 0.1s ease;
+}
+
+/* Enhanced input focus for mobile */
+.password-input:focus {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-appearance: none) {
+    .password-input {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 25px;
+        -webkit-border-radius: 25px;
+    }
+    
+    .btn-secret {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 25px;
+        -webkit-border-radius: 25px;
+    }
+}
+
+/* Additional Safari compatibility */
+@supports (-webkit-appearance: none) {
+    /* Fix for Safari button styling */
+    button {
+        -webkit-appearance: none;
+        appearance: none;
+        background: none;
+        border: none;
+        outline: none;
+    }
+    
+    /* Fix for Safari input styling */
+    input {
+        -webkit-appearance: none;
+        appearance: none;
+        outline: none;
+    }
+    
+    /* Fix for Safari backdrop-filter */
+    .wishes-card,
+    .personal-message,
+    .secret-message-section,
+    .video-container,
+    .secret-content,
+    .modal-content {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* Prevent zoom on input focus in iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus,
+    input[type="search"]:focus {
+        font-size: 16px;
+    }
+}
+
+/* Enhanced mobile responsiveness for iOS */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 10px;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    .header {
+        padding: 30px 10px;
+    }
+    
+    .main-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        word-break: break-word;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    .birthday-icon {
+        font-size: 2.5rem;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .wishes-card,
+    .personal-message,
+    .secret-message-section {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .password-form {
+        gap: 15px;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .password-input {
+        max-width: 200px;
+        padding: 12px 15px;
+        font-size: 16px;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .btn-secret {
+        padding: 12px 20px;
+        font-size: 16px;
+        min-width: 140px;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .secret-content {
+        padding: 15px;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    .secret-text .secret-image {
+        max-width: 100%;
+        margin: 10px auto;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    /* Better mobile spacing */
+    .card-title {
+        font-size: 1.3rem;
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+    
+    .birthday-message p,
+    .message-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    
+    .video-section h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .video-section p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .secret-message-section h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .secret-message-section p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+}
+
+/* iOS Safari specific animations */
+@supports (-webkit-touch-callout: none) {
+    /* Enable hardware acceleration for better performance */
+    .container,
+    .wishes-card,
+    .personal-message,
+    .secret-message-section,
+    .video-container,
+    .secret-content {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+    }
+    
+    /* Optimize floating shapes for iOS */
+    .shape {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    /* Optimize images for iOS */
+    .secret-text .secret-image {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    /* Better touch scrolling */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    /* Prevent text selection on interactive elements */
+    .btn-secret,
+    .password-input,
+    .close-modal {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        touch-callout: none;
+    }
+    
+    /* Optimize modal for iOS */
+    .modal {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    .modal-content {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 20px, 0);
+            transform: translate3d(0, 20px, 0);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 20px, 0);
+            transform: translate3d(0, 20px, 0);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% { 
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        50% { 
+            -webkit-transform: translate3d(0, -15px, 0);
+            transform: translate3d(0, -15px, 0);
+        }
+    }
+    
+    @keyframes gentle-bounce {
+        0%, 100% { 
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        50% { 
+            -webkit-transform: translate3d(0, -10px, 0);
+            transform: translate3d(0, -10px, 0);
+        }
+    }
 }
