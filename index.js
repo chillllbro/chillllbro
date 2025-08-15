@@ -14,7 +14,7 @@
 const TARGET_RELEASE_TIME = '2025-08-15 00:00:00'; // 🔧 CHANGE THIS!
 
 // 🎭 TRICK MODE: Set to true for real birthday content, false for fake "gotcha" screen
-const SHOW_REAL_CONTENT = false; // 🔧 CHANGE THIS! (true = real content, false = fake screen)
+const SHOW_REAL_CONTENT = true; // 🔧 CHANGE THIS! (true = real content, false = fake screen)
 
 // ============================================================================
 // 🎂 BIRTHDAY WEBSITE COUNTDOWN SYSTEM
